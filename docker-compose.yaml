@@ -1,0 +1,28 @@
+version: '3'
+services:
+  notification-service:
+    image: 'cammd21/notification-service:1.5'
+    container_name: 'notification-service'
+    environment:
+      - kafka-server=dory.srvs.cloudkafka.com:9094
+      - register-topic=qufjdolb-register-topic
+      - kafka-username=qufjdolb
+      - kafka-password=hxvqD0Xc48ozIgF9dXWkW8qXBqQSD-dz
+    ports:
+      - "8081:8080"
+
+
+  auth-service:
+    image: 'cammd21/auth-service:1.2'
+    container_name: 'auth-service'
+    environment:
+      - kafka-server=dory.srvs.cloudkafka.com:9094
+      - kafka-username=qufjdolb
+      - kafka-password=hxvqD0Xc48ozIgF9dXWkW8qXBqQSD-dz
+      - database-url=jdbc:postgresql://aws-0-us-west-1.pooler.supabase.com:5432/postgres
+      - database-username=postgres.nmopmttvfwuvwhgtblpm
+      - database-password=ePfAEUDdP7E04QSB
+      - origin=http://localhost:3000
+    ports:
+      - "8080:8080"
+
